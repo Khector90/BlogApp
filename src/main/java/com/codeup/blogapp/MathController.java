@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MathController {
-    @GetMapping("/add{a}/and/{b}")
+    @GetMapping("/add/{a}/and/{b}")
     public int add(@PathVariable int a, @PathVariable int b){
         return a + b;
     }
