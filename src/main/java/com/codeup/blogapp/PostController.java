@@ -15,8 +15,16 @@ public class PostController {
     public String postID(@PathVariable int id){
         return "view an individual post " + id;
     }
+//    looked for  short hand way to find the answer
+    @GetMapping("/create")
+    public String createForm() {
+        return "view the form for creating a post";
+    }
 
-
-
+    @PostMapping("/post/create")
+    @ResponseBody
+    public String postCreate(){
+        return "create a post ";
+    }
 
 }
