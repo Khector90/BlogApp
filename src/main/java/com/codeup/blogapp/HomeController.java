@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
-    @GetMapping("/{name}")
+    @GetMapping("/home")
     @ResponseBody
-    public String welcomePage(@PathVariable String name){
-        return "Hello " + name + " This is the landing area!";
+    public String welcome(){
+        return "home";
     }
 }
+
