@@ -9,14 +9,17 @@
 <a href="/roll-dice">Roll the Dice</a>
 <h1>Guess the dice!</h1>
 <h2>Guess a number between 1-6</h2>
-<form action="/roll-dice" method="post">
-    <button>Guess no. 1</button>
-    <button>Guess no. 2</button>
-    <button>Guess no. 3</button>
-    <button>Guess no. 4</button>
-    <button>Guess no. 5</button>
-    <button>Guess no. 6</button>
-</form>
+<!--<form action="/roll-dice" method="post">-->
+    <a href="/roll-dice/1">Guess no. 1</a>
+    <a href="/roll-dice/2">Guess no. 2</a>
+    <a href="/roll-dice/3">Guess no. 3</a>
+    <a href="/roll-dice/4">Guess no. 4</a>
+    <a href="/roll-dice/5">Guess no. 5</a>
+    <a href="/roll-dice/6">Guess no. 6</a>
+<p >Number Rolled <span th:text="${randomNum}"></span></p>
+<p >Number Guessed <span th:text="${n}"></span></p>
+
+
 
 
 </body>

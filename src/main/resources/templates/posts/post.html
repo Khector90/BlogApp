@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>View Posts</title>
+</head>
+<body>
+
+<div th:object="${posts}">
+  <h1 th:text="${post.user}"></h1>
+  <h1 th:text="${post.title}"></h1>
+  <p th:text="${post.body}"></p>
+</div>
+
+<form action="/join" method="post">
+
+
+
+</form>
+</body>
+</html>

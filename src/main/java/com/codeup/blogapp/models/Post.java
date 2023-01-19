@@ -1,6 +1,8 @@
 package com.codeup.blogapp.models;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -14,6 +16,22 @@ public class Post {
 
     @Column(nullable = false)
     private String body;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy =  "post")
+    private List<PostImage> images;
+
+
+    @OneToOne
+    private User user;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "posts_catgories",
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+
+    )
+    private List<PostCategory> categories;
 
     public Post() {}
 
@@ -50,5 +68,29 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public List<PostImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<PostImage> images) {
+        this.images = images;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<PostCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<PostCategory> categories) {
+        this.categories = categories;
     }
 }
