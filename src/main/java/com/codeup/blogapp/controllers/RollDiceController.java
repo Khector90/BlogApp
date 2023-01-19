@@ -1,4 +1,4 @@
-package com.codeup.blogapp;
+package com.codeup.blogapp.controllers;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
