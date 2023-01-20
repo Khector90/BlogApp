@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<nav>
+    <a th:href="@{/home}"%nbsp>Home</a>
+    <a th:href="@{/about}"%nbsp>About</a>
+    <a th:href="@{/contact}"%nbsp>Contact</a>
+</nav>
+
 <body>
 
 </body>
 </html>
+
+<!--How to use the partials
+<body>
+    <div th:insert="header"></div>
+    <div th:insert="navbar"></div>
+    <div th:replace="fragments/main :: main"></div>
+    <div th:insert="footer"></div>
+</body>
+</html>
+-->
