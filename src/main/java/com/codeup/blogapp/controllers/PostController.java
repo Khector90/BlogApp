@@ -4,59 +4,59 @@ import com.codeup.blogapp.models.Post;
 import com.codeup.blogapp.models.User;
 import com.codeup.blogapp.repositories.PostRepository;
 import com.codeup.blogapp.repositories.UserRepository;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class PostController {
-    private final PostRepository postDoa;
-    private final UserRepository userDoa;
+    private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDoa, UserRepository userDoa){
-        this.postDoa = postDoa;
-        this.userDoa = userDoa;
+    public PostController(PostRepository postDao, UserRepository userDao){
+        this.postDao = postDao;
+        this.userDao = userDao;
     }
 
 
-    @RequestMapping(path = "/post/{id}" , method = RequestMethod.GET)
-    @ResponseBody
-    public String postID(@PathVariable int id){
-        return "view an individual post " + id;
-    }
-//    looked for  short hand way to find the answer
-    @GetMapping("/create")
-    public String createForm() {
-        return "view the form for creating a post";
+    @GetMapping(path = "/post/{id}")
+    public String postID(@PathVariable int id, Model model){
+        Post currentPost = postDao.getReferenceById((long) id);
+        model.addAttribute("post", currentPost);
+        return "posts/post";
     }
 
-    @GetMapping ("/posts/create")
-    public String createAdPage(){
+    @GetMapping("/posts/create")
+    public String createForm()
+    {
         return "posts/create";
     }
 
-    @PostMapping("/post/create")
-    @ResponseBody
-    public String postCreate(@RequestParam(name = "username") String username,@RequestParam(name="title") String title, @RequestParam(name = "body")String body){
+    @PostMapping("/posts/create")
+    public String postCreate(@RequestParam(name = "username") String username,@RequestParam(name="title") String title, @RequestParam(name = "body")String body)
+    {
+        System.out.println(username);
         Post post = new Post();
-        User user =userDoa.findByUsername(username);
+        User user =userDao.findByUsername(username);
         post.setTitle(title);
         post.setBody(body);
         post.setUser(user);
-        postDoa.save(post);
+        postDao.save(post);
 
         return "redirect:/posts";
     }
 
     @GetMapping("/posts")
     public String getPost(Model model){
-        List<Post> posts = postDoa.findAll();
+        List<Post> posts = postDao.findAll();
+        for (Post post: posts){
+            System.out.println(post.getUser().getUsername());
+        }
         model.addAttribute("posts", posts);
         return "posts/show";
     }
-
-
 
 
 }
