@@ -28,25 +28,28 @@ public class PostController {
         return "posts/post";
     }
 
-    @GetMapping("/posts/create")
-    public String createForm()
-    {
-        return "posts/create";
-    }
 
-    @PostMapping("/posts/create")
-    public String postCreate(@RequestParam(name = "username") String username,@RequestParam(name="title") String title, @RequestParam(name = "body")String body)
-    {
-        System.out.println(username);
-        Post post = new Post();
-        User user =userDao.findByUsername(username);
-        post.setTitle(title);
-        post.setBody(body);
-        post.setUser(user);
-        postDao.save(post);
+//    WAY WITHOUT FORM MODEL BINDING
 
-        return "redirect:/posts";
-    }
+//    @GetMapping("/posts/create")
+//    public String createForm()
+//    {
+//        return "posts/create";
+//    }
+//
+//    @PostMapping("/posts/create")
+//    public String postCreate(@RequestParam(name = "username") String username,@RequestParam(name="title") String title, @RequestParam(name = "body")String body)
+//    {
+//        System.out.println(username);
+//        Post post = new Post();
+//        User user =userDao.findByUsername(username);
+//        post.setTitle(title);
+//        post.setBody(body);
+//        post.setUser(user);
+//        postDao.save(post);
+//
+//        return "redirect:/posts";
+//    }
 
     @GetMapping("/posts")
     public String getPost(Model model){
@@ -56,6 +59,21 @@ public class PostController {
         }
         model.addAttribute("posts", posts);
         return "posts/show";
+    }
+
+    @GetMapping("/posts/create")
+    public String postCreate(Model model){
+        model.addAttribute("postToCreate", new post());
+        return "posts/create";
+
+    }
+
+    @PostMapping("/ads/create")
+    public String postCreate(@ModelAttribute Post postCreate){
+        User user =userDao.getReferenceById(1L);
+        postCreate.setUser(user);
+        postDao.save(postCreate);
+        return "redirect:/posts";
     }
 
 
