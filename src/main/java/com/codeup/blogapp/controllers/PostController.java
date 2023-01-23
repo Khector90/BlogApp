@@ -60,7 +60,7 @@ public class PostController {
         model.addAttribute("posts", posts);
         return "posts/show";
     }
-
+//---------------------------Form model binding here-------------------------
     @GetMapping("/posts/create")
     public String postCreate(Model model){
         model.addAttribute("postToCreate", new post());
@@ -75,6 +75,6 @@ public class PostController {
         postDao.save(postCreate);
         return "redirect:/posts";
     }
-
+//---------------------------Form model binding here-------------------------
 
 }
