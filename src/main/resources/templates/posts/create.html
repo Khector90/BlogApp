@@ -10,28 +10,29 @@
 <body>
 
 <h1>Write a Post</h1>
-<form method="post" action="/posts/create">
-    <label for="username">Username: </label>
-    <input type="text" name="username" id="username">
-    <br>
-    <label for="title">Title: </label>
-    <input type="text" name="title" id="title">
-    <br>
-    <label for="body">Body: </label>
-    <input type="text" name="body" id="body">
-    <br>
-    <button type="submit">Create Post</button>
-</form>
+<!--<form method="post" action="/posts/create">-->
+<!--    <label for="username">Username: </label>-->
+<!--    <input type="text" name="username" id="username">-->
+<!--    <br>-->
+<!--    <label for="title">Title: </label>-->
+<!--    <input type="text" name="title" id="title">-->
+<!--    <br>-->
+<!--    <label for="body">Body: </label>-->
+<!--    <input type="text" name="body" id="body">-->
+<!--    <br>-->
+<!--    <button type="submit">Create Post</button>-->
+<!--</form>-->
 
 
 
 <!-----------------------------------------Form Model Binding -------------------------------------->
-<!--<form th:action="@{/posts/create}" th:method="post" th:object="${postToCreate}">-->
-<!--   <label>Title</label>-->
-<!--    <input th:field="${title}">-->
-<!--    <label>body</label>-->
-<!--    <input th:field="${body}">-->
-<!--    <button type="submit">Submit</button>-->
-<!--</form>              didn't work -->
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+   <label>Title</label>
+    <input th:field="*{title}">
+    <label>body</label>
+    <input th:field="*{body}">
+    <button type="submit">Submit</button>
+
+</form>
 </body>
 </html>

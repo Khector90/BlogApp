@@ -4,6 +4,7 @@ import com.codeup.blogapp.models.Post;
 import com.codeup.blogapp.models.User;
 import com.codeup.blogapp.repositories.PostRepository;
 import com.codeup.blogapp.repositories.UserRepository;
+//import com.codeup.blogapp.service.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import java.util.List;
 public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
+
+//    private final EmailService emailService;
 
     public PostController(PostRepository postDao, UserRepository userDao){
         this.postDao = postDao;
@@ -36,7 +39,7 @@ public class PostController {
 //    {
 //        return "posts/create";
 //    }
-//
+
 //    @PostMapping("/posts/create")
 //    public String postCreate(@RequestParam(name = "username") String username,@RequestParam(name="title") String title, @RequestParam(name = "body")String body)
 //    {
@@ -60,15 +63,15 @@ public class PostController {
         model.addAttribute("posts", posts);
         return "posts/show";
     }
-//---------------------------Form model binding here-------------------------
+////---------------------------Form model binding here-------------------------
     @GetMapping("/posts/create")
     public String postCreate(Model model){
-        model.addAttribute("postToCreate", new post());
+        model.addAttribute("post", new Post());
         return "posts/create";
 
     }
 
-    @PostMapping("/ads/create")
+    @PostMapping("/posts/create")
     public String postCreate(@ModelAttribute Post postCreate){
         User user =userDao.getReferenceById(1L);
         postCreate.setUser(user);
@@ -76,5 +79,21 @@ public class PostController {
         return "redirect:/posts";
     }
 //---------------------------Form model binding here-------------------------
+
+
+    @GetMapping("/posts/{id}/edit")
+    public String showEditForm(@PathVariable long id, Model model) {
+        Post currentPost = postDao.getReferenceById(id);
+        System.out.println(currentPost.getTitle());
+        model.addAttribute("post", currentPost);
+        return "posts/edit";
+    }
+    @PostMapping("/posts/edit")
+    public String editPost(@ModelAttribute Post post) {
+        User user = userDao.findAll().get(0);
+        post.setUser(user);
+        postDao.save(post);
+        return "redirect:/posts";
+    }
 
 }
