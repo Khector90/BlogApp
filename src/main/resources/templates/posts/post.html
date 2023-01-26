@@ -6,7 +6,7 @@
   <title>View Posts</title>
 </head>
 <body>
-
+<nav th:replace="~{partials/navbar :: navbar}"></nav>
 <div sec:authorize="isFullyAuthenticated()">
   This content is only shown to authenticated users.
 
