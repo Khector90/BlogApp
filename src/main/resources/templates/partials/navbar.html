@@ -8,6 +8,16 @@
     <a th:href="@{/home}"%nbsp>Home</a>
     <a th:href="@{/about}"%nbsp>About</a>
     <a th:href="@{/contact}"%nbsp>Contact</a>
+
+        <ul>
+            <!-- More links here... -->
+            <li>
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                </form>
+            </li>
+        </ul>
+
 </nav>
 
 <body>
